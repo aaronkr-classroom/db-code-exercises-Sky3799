@@ -1,0 +1,68 @@
+/*
+게임 유저 관리
+
+[Entities / 개체]
+- users
+- admin
+
+요구사항 정의
+
+[users(게임 유저)]
+1. 유저는 회원가입을 할 수 있다.
+2. 유저는 로그인 및 로그아웃을 할 수 있다.
+3. 유저는 자신의 프로필 정보를 조회 및 수정할 수 있다.
+4. 유저는 게임 플레이 기록(레벨, 점수 등)을 저장할 수 있다.
+5. 유저는 비밀번호를 변경하거나 재설정할 수 있다.
+
+[admin(관리자)]
+1. 관리자는 전체 유저 목록을 조회할 수 있다.
+2. 관리자는 특정 유저 정보를 조회할 수 있다.
+3. 관리자는 유저 계정을 정지(밴) 또는 활성화할 수 있다.
+4. 관리자는 유저의 게임 데이터(레벨, 점수 등)를 수정할 수 있다.
+5. 관리자는 관리자 계정으로 로그인할 수 있다.
+
+
+[users Properties / 게임 유저 속성]
+- id (BIGSERIAL) // 유저 고유 ID
+- nickname (TEXT) // 유저 게임 내 닉네임
+- password (TEXT) // 비밀번호
+- level (NUMERIC) // 유저 레벨
+
+
+[admin Properties / 관리자 속성]
+- id (BIGSERIAL) // 관리자 고유 ID
+- password (TEXT) // 관리자 비밀번호
+- role (TEXT) // 관리자 권한
+
+*/
+
+CREATE TABLE users (
+id BIGSERIAL,
+nickname TEXT,
+password TEXT,
+level INTEGER
+);
+
+CREATE TABLE admin (
+id BIGSERIAL,
+password TEXT,
+role TEXT
+);
+
+INSERT INTO users (nickname, password, level)
+VALUES
+('player1', 'pass123', 1),
+('dragonSlayer', 'dragon123', 10),
+('proGamer', 'pro123', 25),
+('legend99', 'legend123', 50);
+
+INSERT INTO admin (password, role)
+VALUES
+('admin123', 'SUPER_ADMIN'),
+('mod123', 'MODERATOR'),
+('gm123', 'GAME_MASTER');
+
+SELECT * FROM users;
+SELECT nickname, level FROM users;
+SELECT nickname from users ORDER BY level ASC;
+SELECT role FROM admin WHERE role = 'SUPER_ADMIN';
